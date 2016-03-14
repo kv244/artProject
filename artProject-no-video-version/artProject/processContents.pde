@@ -5,5 +5,6 @@ public enum processContents{
   KEEPIMAGE,
   SCROLLTEXT,
   NEWIMAGE,
-  DRAW
+  DRAW,
+  MELT
 }

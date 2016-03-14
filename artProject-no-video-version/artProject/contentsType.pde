@@ -3,5 +3,6 @@ public enum contentsType{
   ATV, 
   ATEXT, 
   AVIDEO,
-  ADRAW
+  ADRAW, 
+  AMELT
 }

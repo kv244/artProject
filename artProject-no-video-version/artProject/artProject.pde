@@ -1,10 +1,6 @@
 /**
- *
  * TODO
  * check error fixed image: no, to fix
- * add melting and other effects
- * what is making the bottom black?
- * add video (1)
  */
 
 import java.io.*;
@@ -27,7 +23,7 @@ void setup(){
   }
   int sizeX = 1000;
   int sizeY = 500; 
-  size(1000, 600);   
+  size(1000, 600);   // 100 for bottom window
   background(255, 255, 255);
   
   d = new driver(sizeX, sizeY, height - sizeY);
@@ -64,8 +60,7 @@ void buildImageList() {
   if(imageNames.length == 0){
     System.out.println("No *.jpg files in current directory");
   }else{
-    System.out.println("Images:");
-    System.out.println(imageNames.length);
+    System.out.println("Images: " + Integer.toString(imageNames.length));
   }
 }
 

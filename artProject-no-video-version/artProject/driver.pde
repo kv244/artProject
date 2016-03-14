@@ -1,5 +1,8 @@
 /**
  * Driver
+ * Manages the images to be displayed
+ * and the text at the bottom of the screen
+ * (if used)
  */
  
 import java.util.*; 
@@ -23,8 +26,11 @@ public class driver{
     processContents.KEEPIMAGE,
     processContents.SCROLLTEXT,
     processContents.NEWIMAGE,
+    processContents.MELT,
     processContents.DRAW,
-    processContents.NEWIMAGE // favor new images
+    processContents.NEWIMAGE,
+    processContents.NEWIMAGE,
+    processContents.KEEPIMAGE
   };
   
   public driver(int x, int y, int offset){
@@ -69,23 +75,25 @@ public class driver{
     }
   }
   
+  /**
+   * Generate the next action for each image
+   */
   public void next(){
     int action, n;
     
     for(imageContainer i:images){
       if(i.canChangeAction()) { 
-        action = (int)Math.floor(Math.random() * actions.length);
+        action = (int)(random(actions.length)); // +1??
        
         if(actions[action] == processContents.NEWIMAGE){
-          n = (int)Math.floor(Math.random() * imageNames.length); 
+          n = (int)(random(imageNames.length)); 
           i.setImageName(this.imageNames[n]);
         }
         
         if(actions[action] == processContents.SCROLLTEXT){
-          n = (int)Math.floor(Math.random() * texts.length);
+          n = (int)(random(texts.length));
           i.setText(texts[n]);
         }
-        
         i.setAction(actions[action]);
       }
       i.processContents();
@@ -182,25 +190,26 @@ public class driver{
     float textSize = textAscent() + textDescent();
     int noLines = (int)(this.offset / textSize);  /* TODO use? */
     
-    stroke(0);
-    rect(0, this.screenY, this.screenX, this.offset);
+    stroke(255);
+    fill(0, 255, 0);
+    //rect(0, this.screenY, this.screenX, this.offset);
     text(texts[currentLine++], 0, this.screenY + offsetLine, this.screenX, this.offset);
     offsetLine += textSize;
+    
     // System.out.println(currentLine);
     // System.out.println(textAscent() + textDescent());
+    
     if(this.screenY + offsetLine > height){  
       offsetLine = 0;
-      fill(0, 0, 128);
+      fill(0, 0, 255);
       rect(0, this.screenY, this.screenX, this.offset);
-      noFill();
     }
     if(currentLine >= texts.length){
       currentLine=0;
-      fill(0, 0, 128);
+      fill(0, 0, 255);
       rect(0, this.screenY, this.screenX, this.offset);
-      noFill();
-    }else
-      noFill();
+    }
+    noFill();
     noStroke();
   }
 }
