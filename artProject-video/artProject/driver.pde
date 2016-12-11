@@ -71,7 +71,10 @@ public class driver{
   
   public void next(){
     int action, n;
-    
+    if(images == null){
+      println("No images");
+      return;
+    }
     for(imageContainer i:images){
       System.out.println("driver next " + i.toString());
       if(i.canChangeAction()) { 
@@ -85,7 +88,10 @@ public class driver{
         if(actions[action] == processContents.VIDEO){
           n = (int)Math.floor(Math.random() * videoNames.length);
           System.out.println("set movie name...");
-          i.setMovie(this.videoNames[n]);
+          if(n >= this.videoNames.length)
+           println(n + " too big"); 
+          else
+            i.setMovie(this.videoNames[n]);
         }
         
         if(actions[action] == processContents.SCROLLTEXT){
@@ -190,6 +196,10 @@ public class driver{
   }
   
   public void showImages(){
+    if(images==null){
+      println("showImages -- no images");
+      return;
+    }
      for(imageContainer i:images)
        i.renderImage();
   }

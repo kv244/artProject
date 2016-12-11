@@ -1,6 +1,8 @@
 /**
  * TODO
  * check error fixed image: no, to fix
+ * Not sure if this is fixed
+ * Also it has a bug - some images can be drawn in the text area
  */
 
 import java.io.*;

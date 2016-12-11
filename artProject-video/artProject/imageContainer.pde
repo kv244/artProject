@@ -173,8 +173,10 @@ public void processContents(){
         this.setTv(true);
         break;
       case VIDEO:
-        if(this.movie.available()) 
-          this.movie.read();
+        if(this.movie != null){
+          if(this.movie.available()) 
+            this.movie.read();
+          }
         //this.movie.play();
         break;
     }

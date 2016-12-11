@@ -1,22 +1,22 @@
 /**
- * TODO #3
  *   Assigned to images from above, otherwise text or paint
  *   If image is being modified, copy and append to array
  *   fix image not loaded
  *   figure out cumulative fixes, and ages
- * TODO #1
- * add scrolling text
+ *   add scrolling text
  *   decide if current text is ok or if there should be specialized window below
- * TODO #3
  *   add melting and other effects
- * TODO #2
  *   get images and texts from web services based on tags in ini file
  * TODO add video
- *   The way this is now, movies doesnt work - I need to clarify the library and to see 
+ *   The way this is now, movies doesnt work - I need to clarify the library and to see
+ *   The Syphon send does not work
  */
 
 import processing.video.*;
 import java.io.*;
+import codeanticode.syphon.*;
+
+SyphonServer server;
 
 driver d;
 String[] imageNames;
@@ -38,7 +38,9 @@ void setup(){
   }
   int sizeX = 1000;
   int sizeY = 600;
-  size(1000, 600);   
+  size(1000, 600, P3D);
+  PJOGL.profile = 1;
+  server = new SyphonServer(this, "processingImages");
   background(255, 255, 255);
   
   d = new driver(sizeX, sizeY, this);
@@ -131,6 +133,13 @@ void draw(){
   
  d.next();
  d.showImages(); 
+ try{
+   server.sendScreen();
+   println("Syphon clients: " + server.hasClients());
+ }catch(Exception x){
+   println("Error ");
+   println(x.getMessage());
+ }
  /*
  List<Movie> pMovies = d.getMovies();
  if(pMovies != null){
